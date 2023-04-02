@@ -4,6 +4,7 @@ import { Brand } from "../helpers/Brand";
 type Password = Brand<string, "Password">;
 type Email = Brand<string, "Email">;
 
+// NOTE: invaild value -> valid value，这样使用 createUserOnApi 之前必须 validateValues
 export const validateValues = (values: { email: string; password: string }) => {
   if (!values.email.includes("@")) {
     throw new Error("Email invalid");
@@ -13,8 +14,8 @@ export const validateValues = (values: { email: string; password: string }) => {
   }
 
   return {
-    email: values.email,
-    password: values.password,
+    email: values.email as Email,
+    password: values.password as Password,
   };
 };
 
